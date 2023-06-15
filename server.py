@@ -32,7 +32,7 @@ def getPath(message):
 
     if path[-1:] == '/':
         path = path[:-1]
-    print("O caminho é: '" + path +"'")
+    #print("O caminho é: '" + path +"'")
     
     return path
 
@@ -43,14 +43,14 @@ def getFileName(path):
 
 def handleClient(client_socket, client_adress):
     print("[NOVA CONEXÃO]", client_adress, "Conectado")
-    message = client_socket.recv(1024).decode()
-    path = getPath(message)
-    print("Caminho: "+ BASE_PATH + path)
+    request = client_socket.recv(1024).decode()
+    path = getPath(request)
+    #print("Caminho: "+ BASE_PATH + path)
 
     # Se for /HEADER deve responder com o cabeçalho HTTP
     if path == "HEADER":
-        content = "<br>" + message            
-        print (content)
+        content = "<br>" + request            
+        #print (content)
         response = HEADER_HTTP_200 + content
         client_socket.send(response.encode('utf-8'))        
     
